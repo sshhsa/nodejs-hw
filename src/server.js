@@ -5,8 +5,9 @@ import dotenv from 'dotenv';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
-import { errorHandler } from './middleware/errorHandler.js';
 import notesRouter from './routes/notesRoutes.js';
+import { errors } from 'celebrate';
+import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 
@@ -18,9 +19,10 @@ app.use(logger);
 app.use(cors());
 app.use(express.json());
 
-app.use(notesRouter);
+app.use('/notes', notesRouter);
 
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 await connectMongoDB();
