@@ -5,11 +5,11 @@ import {
   createNoteSchema,
   updateNoteSchema,
   noteIdSchema,
-  getNotesSchema,
+  getAllNotesSchema,
 } from '../validations/notesValidation.js';
 
 import {
-  getNotes,
+  getAllNotes,
   getNoteById,
   createNote,
   updateNote,
@@ -18,10 +18,14 @@ import {
 
 const router = Router();
 
-router.get('/', celebrate(getNotesSchema), getNotes);
-router.get('/:noteId', celebrate(noteIdSchema), getNoteById);
-router.post('/', celebrate(createNoteSchema), createNote);
-router.patch('/:noteId', celebrate(updateNoteSchema), updateNote);
-router.delete('/:noteId', celebrate(noteIdSchema), deleteNote);
+router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
+
+router.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
+
+router.post('/notes', celebrate(createNoteSchema), createNote);
+
+router.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
+
+router.delete('/notes/:noteId', celebrate(noteIdSchema), deleteNote);
 
 export default router;
