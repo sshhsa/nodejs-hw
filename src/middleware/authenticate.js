@@ -6,7 +6,7 @@ export const authenticate = async (req, res, next) => {
   const { sessionId, accessToken } = req.cookies;
 
   if (!sessionId || !accessToken) {
-    throw createHttpError(401, 'Missins session credentials');
+    throw createHttpError(401, 'Missing session credentials');
   }
 
   const session = await Session.findOne({

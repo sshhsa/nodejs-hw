@@ -5,11 +5,11 @@ import {
   logoutUser,
   registerUser,
   refreshUserSession,
-} from '../controllers/authController';
+} from '../controllers/authController.js';
 import {
   loginUserSchema,
   registerUserSchema,
-} from '../validations/authValidation';
+} from '../validations/authValidation.js';
 
 const router = Router();
 
