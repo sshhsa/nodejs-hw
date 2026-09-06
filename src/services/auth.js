@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/time.js';
 import { Session } from '../models/session.js';
 import { randomUUID } from 'node:crypto';
@@ -19,7 +18,7 @@ export const createSession = async (userId) => {
 export const setSessionCookies = (res, session) => {
   res.cookie('accessToken', session.accessToken, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'none',
     maxAge: FIFTEEN_MINUTES,
   });

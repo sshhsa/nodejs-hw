@@ -6,7 +6,7 @@ import { connectMongoDB } from './db/connectMongoDB.js';
 import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import authRouter from './routers/authRouter.js';
-import notesRouter from './routers/notesRouter';
+import notesRouter from './routers/notesRouter.js';
 import { errors } from 'celebrate';
 import { errorHandler } from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
@@ -22,12 +22,12 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(authRouter);
 app.use(notesRouter);
 
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
-// app.use(authRoutes);
 
 await connectMongoDB();
 
