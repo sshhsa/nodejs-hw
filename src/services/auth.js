@@ -4,8 +4,8 @@ import { Session } from '../models/session.js';
 import { randomUUID } from 'node:crypto';
 
 export const createSession = async (userId) => {
-  const accessToken = crypto.randomUUID();
-  const refreshToken = crypto.randomUUID();
+  const accessToken = randomUUID();
+  const refreshToken = randomUUID();
 
   return Session.create({
     userId,
