@@ -5,6 +5,7 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 export const updateUserAvatar = async (req, res, next) => {
   try {
     const { file, user } = req;
+
     if (!file) {
       throw createHttpError(400, 'No file');
     }
@@ -17,7 +18,9 @@ export const updateUserAvatar = async (req, res, next) => {
       { returnDocument: 'after' },
     );
 
-    res.status(200).json({ avatar: updatedUser.avatar });
+    res.status(200).json({
+      url: updatedUser.avatar,
+    });
   } catch (error) {
     next(error);
   }
